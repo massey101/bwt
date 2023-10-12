@@ -10,14 +10,14 @@ import (
 
 func main() {
 	writer := bufio.NewWriter(os.Stdout)
-	err := compresslib.Decompress(bufio.NewReader(os.Stdin), writer, 1)
+	_, _, err := compresslib.Decompress(bufio.NewReader(os.Stdin), writer, 2, 1)
 	if err != nil {
-		fmt.Printf("Error! %v\n", err.Error())
+		fmt.Fprintf(os.Stderr, "Error! %v\n", err.Error())
 		os.Exit(1)
 	}
 	err = writer.Flush()
 	if err != nil {
-		fmt.Printf("Error! %v\n", err.Error())
+		fmt.Fprintf(os.Stderr, "Error! %v\n", err.Error())
 		os.Exit(1)
 	}
 }

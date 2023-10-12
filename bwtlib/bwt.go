@@ -1,7 +1,6 @@
 package bwtlib
 
 import (
-	"bytes"
 	"encoding/binary"
 	"errors"
 	"io"
@@ -28,13 +27,16 @@ func BWT(input []byte) ([]byte, error) {
 	slices.SortFunc(
 		table,
 		func(a, b int) int {
-			aSlice := make([]byte, 0, len(input))
-			aSlice = append(aSlice, input[a:]...)
-			aSlice = append(aSlice, input[:a]...)
-			bSlice := make([]byte, 0, len(input))
-			bSlice = append(bSlice, input[b:]...)
-			bSlice = append(bSlice, input[:b]...)
-			return bytes.Compare(aSlice, bSlice)
+			for i := range input {
+				if input[(a+i)%len(input)] > input[(b+i)%len(input)] {
+					return 1
+				}
+				if input[(a+i)%len(input)] < input[(b+i)%len(input)] {
+					return -1
+				}
+			}
+
+			return 0
 		},
 	)
 

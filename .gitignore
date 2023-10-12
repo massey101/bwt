@@ -4,3 +4,5 @@ compress/compress
 decompress/decompress
 mtf/mtf
 imtf/imtf
+zzscratch/**
+*.prof

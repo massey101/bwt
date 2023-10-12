@@ -5,12 +5,12 @@ import (
 	"fmt"
 	"os"
 
-	"git.neds.sh/jack.massey/bwt/compresslib"
+	"git.neds.sh/jack.massey/bwt/mtflib"
 )
 
 func main() {
 	writer := bufio.NewWriter(os.Stdout)
-	_, _, err := compresslib.Compress(bufio.NewReader(os.Stdin), writer, 4, 1)
+	err := mtflib.MTF(bufio.NewReader(os.Stdin), writer)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error! %v\n", err.Error())
 		os.Exit(1)
